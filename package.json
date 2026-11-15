@@ -1,0 +1,22 @@
+{
+  "name": "hotel-booking-management-system",
+  "version": "1.0.0",
+  "description": "Hotel Booking Management System - Full-Stack Web Application",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "build": "cd client && npm run build && cd ../server && npm run build",
+    "test": "cd server && npm test",
+    "test:client": "cd client && npm test",
+    "db:migrate": "cd server && npx prisma migrate dev",
+    "db:seed": "cd server && npx prisma db seed",
+    "db:reset": "cd server && npx prisma migrate reset --force",
+    "db:studio": "cd server && npx prisma studio",
+    "setup": "npm install && cd server && npm install && cd ../client && npm install && cd ../server && npx prisma generate"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
