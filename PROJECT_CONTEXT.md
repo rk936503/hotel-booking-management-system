@@ -12,7 +12,8 @@
 The Hotel Booking Management System is an end-to-end, database-backed enterprise web application designed to support the complete operational workflow of a hospitality business. It bridges the guest-facing booking journey with administrative and front-desk hotel operations.
 
 ### Key Business Objectives
-- **Room and Rate Administration:** Dynamic management of room categories, individual inventory, capacities, amenities, and nightly rates.
+- **Room and Rate Administration:** Dynamic management of room categories, individual inventory, capacities, amenities, and nightly rates denominated in Indian Rupees (INR - ₹).
+- **Indian Rupee (INR) Localization:** Standardized `en-IN` locale formatting across guest, staff, and admin views using JavaScript `Intl.NumberFormat` with ₹ symbol.
 - **Availability Search Engine:** Real-time search by date range, capacity, and room type with strict date validations (half-open intervals, preventing past bookings, capacity constraints).
 - **Reservation Lifecycle & State Machine:** Handling holds, confirmations, check-ins, check-outs, cancellations, and expirations with deterministic transition validation.
 - **Concurrency & Double-Booking Prevention:** Atomic transactions, hold timers, and overlap exclusion logic to prevent conflicting reservations under concurrent load.

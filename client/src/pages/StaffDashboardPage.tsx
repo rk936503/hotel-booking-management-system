@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import { Reservation, Room } from '../types';
+import { formatCurrency } from '../utils/currency';
 import { 
   ClipboardList, 
   LogIn, 
@@ -235,10 +236,10 @@ export const StaffDashboardPage: React.FC = () => {
                         <span className="text-[11px] text-slate-500 block">{res.room.roomType.name}</span>
                       </td>
                       <td className="px-5 py-4 text-slate-700">
-                        {new Date(res.checkInDate).toLocaleDateString()} → {new Date(res.checkOutDate).toLocaleDateString()}
+                        {new Date(res.checkInDate).toLocaleDateString('en-IN')} → {new Date(res.checkOutDate).toLocaleDateString('en-IN')}
                         <span className="text-[11px] text-slate-400 block">{res.numberOfNights} nights</span>
                       </td>
-                      <td className="px-5 py-4 font-bold text-slate-900">${res.totalAmount.toFixed(2)}</td>
+                      <td className="px-5 py-4 font-bold text-slate-900">{formatCurrency(res.totalAmount)}</td>
                       <td className="px-5 py-4">
                         <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${
                           res.status === 'CONFIRMED' ? 'bg-emerald-100 text-emerald-800' :
@@ -312,7 +313,7 @@ export const StaffDashboardPage: React.FC = () => {
                         <span className="font-semibold text-slate-800">Room {res.room.roomNumber}</span>
                         <span className="text-[11px] text-slate-500 block">{res.room.roomType.name}</span>
                       </td>
-                      <td className="px-5 py-4 font-bold text-slate-900">${res.totalAmount.toFixed(2)}</td>
+                      <td className="px-5 py-4 font-bold text-slate-900">{formatCurrency(res.totalAmount)}</td>
                       <td className="px-5 py-4 text-right">
                         <button
                           onClick={() => handleCheckIn(res.id, res.bookingReference)}

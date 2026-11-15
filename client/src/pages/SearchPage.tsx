@@ -3,6 +3,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { Room, RoomType } from '../types';
 import { useAuth } from '../context/AuthContext';
+import { formatCurrency } from '../utils/currency';
 import { Calendar, Users, ArrowRight, ShieldCheck, AlertCircle, Sparkles } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -279,16 +280,16 @@ export const SearchPage: React.FC = () => {
                   <div className="p-5 pt-0">
                     <div className="p-3 bg-slate-50 rounded-xl mb-4 text-xs space-y-1">
                       <div className="flex justify-between text-slate-600">
-                        <span>${room.roomType.basePrice} × {nights} nights</span>
-                        <span>${subtotal.toFixed(2)}</span>
+                        <span>{formatCurrency(room.roomType.basePrice)} × {nights} nights</span>
+                        <span>{formatCurrency(subtotal)}</span>
                       </div>
                       <div className="flex justify-between text-slate-500">
                         <span>Est. Tax (12%)</span>
-                        <span>${estTax.toFixed(2)}</span>
+                        <span>{formatCurrency(estTax)}</span>
                       </div>
                       <div className="flex justify-between font-bold text-slate-900 pt-1 border-t border-slate-200">
                         <span>Est. Total</span>
-                        <span className="text-brand-700 font-extrabold">${estTotal.toFixed(2)}</span>
+                        <span className="text-brand-700 font-extrabold">{formatCurrency(estTotal)}</span>
                       </div>
                     </div>
 

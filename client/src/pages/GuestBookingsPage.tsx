@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
 import { Reservation } from '../types';
+import { formatCurrency } from '../utils/currency';
 import { Calendar, Clock, AlertCircle, CheckCircle, Ban, ArrowRight, Eye, RefreshCw } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -124,9 +125,9 @@ export const GuestBookingsPage: React.FC = () => {
                   <span className="flex items-center space-x-1">
                     <Calendar className="w-3.5 h-3.5 text-brand-600" />
                     <span>
-                      {new Date(res.checkInDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                      {new Date(res.checkInDate).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' })}
                       {' → '}
-                      {new Date(res.checkOutDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                      {new Date(res.checkOutDate).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' })}
                     </span>
                   </span>
                   <span>{res.numberOfNights} Nights • {res.numberOfGuests} Guests</span>
@@ -137,7 +138,7 @@ export const GuestBookingsPage: React.FC = () => {
               <div className="w-full lg:w-auto flex flex-row lg:flex-col justify-between lg:items-end items-center gap-3 pt-4 lg:pt-0 border-t lg:border-t-0 border-slate-100">
                 <div className="text-left lg:text-right">
                   <span className="text-xs text-slate-500 block">Total Paid</span>
-                  <span className="text-xl font-black text-slate-900">${res.totalAmount.toFixed(2)}</span>
+                  <span className="text-xl font-black text-slate-900">{formatCurrency(res.totalAmount)}</span>
                 </div>
 
                 <div className="flex items-center space-x-2">

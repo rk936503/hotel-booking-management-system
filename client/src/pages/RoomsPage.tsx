@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { RoomType } from '../types';
+import { formatCurrency } from '../utils/currency';
 import { Users, CheckCircle, ArrowRight, Sparkles } from 'lucide-react';
 
 export const RoomsPage: React.FC = () => {
@@ -94,7 +95,7 @@ export const RoomsPage: React.FC = () => {
                   <div className="flex justify-between items-start">
                     <h2 className="text-2xl font-bold text-slate-900">{rt.name}</h2>
                     <div className="text-right">
-                      <span className="text-2xl font-black text-slate-900">${rt.basePrice}</span>
+                      <span className="text-2xl font-black text-slate-900">{formatCurrency(rt.basePrice)}</span>
                       <span className="text-xs text-slate-500 font-medium block">per night</span>
                     </div>
                   </div>

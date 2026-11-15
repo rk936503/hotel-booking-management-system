@@ -3,6 +3,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { Room } from '../types';
 import { useAuth } from '../context/AuthContext';
+import { formatCurrency } from '../utils/currency';
 import { Clock, ShieldCheck, CreditCard, CheckCircle2, AlertTriangle, ArrowRight, Lock } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -255,7 +256,7 @@ export const CheckoutPage: React.FC = () => {
                 disabled={submitting}
                 className="w-full py-3.5 bg-brand-600 hover:bg-brand-700 disabled:opacity-50 text-white rounded-xl text-sm font-bold uppercase tracking-wider shadow-md transition flex items-center justify-center space-x-2"
               >
-                <span>{submitting ? 'Processing Payment...' : `Confirm & Pay $${totalAmount.toFixed(2)}`}</span>
+                <span>{submitting ? 'Processing Payment...' : `Confirm & Pay ${formatCurrency(totalAmount)}`}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -305,12 +306,12 @@ export const CheckoutPage: React.FC = () => {
               {/* Itemized Price Breakdown */}
               <div className="space-y-2.5 text-sm border-t border-slate-200 pt-4">
                 <div className="flex justify-between text-slate-600 text-xs">
-                  <span>Nightly Rate (${nightlyRate.toFixed(2)} × {nights} nights)</span>
-                  <span className="font-medium text-slate-900">${subtotal.toFixed(2)}</span>
+                  <span>Nightly Rate ({formatCurrency(nightlyRate)} × {nights} nights)</span>
+                  <span className="font-medium text-slate-900">{formatCurrency(subtotal)}</span>
                 </div>
                 <div className="flex justify-between text-slate-600 text-xs">
                   <span>Mandatory Demo Hospitality Tax ({taxRate}%)</span>
-                  <span className="font-medium text-slate-900">${taxAmount.toFixed(2)}</span>
+                  <span className="font-medium text-slate-900">{formatCurrency(taxAmount)}</span>
                 </div>
                 <div className="flex justify-between text-slate-600 text-xs">
                   <span>Resort & Service Fee</span>
@@ -318,7 +319,7 @@ export const CheckoutPage: React.FC = () => {
                 </div>
                 <div className="flex justify-between text-base font-bold text-slate-900 pt-3 border-t border-slate-200">
                   <span>Total Amount Due</span>
-                  <span className="text-xl font-black text-brand-700">${totalAmount.toFixed(2)}</span>
+                  <span className="text-xl font-black text-brand-700">{formatCurrency(totalAmount)}</span>
                 </div>
               </div>
 

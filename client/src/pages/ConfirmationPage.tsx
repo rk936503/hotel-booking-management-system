@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import api from '../services/api';
 import { Reservation } from '../types';
+import { formatCurrency } from '../utils/currency';
 import { CheckCircle2, Calendar, MapPin, Printer, ArrowRight, User as UserIcon, ShieldCheck } from 'lucide-react';
 
 export const ConfirmationPage: React.FC = () => {
@@ -89,7 +90,7 @@ export const ConfirmationPage: React.FC = () => {
             <div>
               <span className="text-slate-500 block mb-0.5">Check-In</span>
               <span className="font-bold text-slate-900 text-sm block">
-                {new Date(reservation.checkInDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                {new Date(reservation.checkInDate).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' })}
               </span>
               <span className="text-[11px] text-slate-500">From 2:00 PM</span>
             </div>
@@ -97,7 +98,7 @@ export const ConfirmationPage: React.FC = () => {
             <div>
               <span className="text-slate-500 block mb-0.5">Check-Out</span>
               <span className="font-bold text-slate-900 text-sm block">
-                {new Date(reservation.checkOutDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                {new Date(reservation.checkOutDate).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' })}
               </span>
               <span className="text-[11px] text-slate-500">Until 11:00 AM</span>
             </div>
@@ -118,12 +119,12 @@ export const ConfirmationPage: React.FC = () => {
           {/* Itemized Financials */}
           <div className="space-y-2 pt-2 text-xs">
             <div className="flex justify-between text-slate-600">
-              <span>Room Subtotal (${reservation.roomPrice.toFixed(2)} × {reservation.numberOfNights} nights)</span>
-              <span className="font-medium text-slate-900">${reservation.subtotal.toFixed(2)}</span>
+              <span>Room Subtotal ({formatCurrency(reservation.roomPrice)} × {reservation.numberOfNights} nights)</span>
+              <span className="font-medium text-slate-900">{formatCurrency(reservation.subtotal)}</span>
             </div>
             <div className="flex justify-between text-slate-600">
               <span>Demo Hospitality Tax (12%)</span>
-              <span className="font-medium text-slate-900">${reservation.taxAmount.toFixed(2)}</span>
+              <span className="font-medium text-slate-900">{formatCurrency(reservation.taxAmount)}</span>
             </div>
             {payment && (
               <div className="flex justify-between text-slate-500 font-mono text-[11px]">
@@ -133,7 +134,7 @@ export const ConfirmationPage: React.FC = () => {
             )}
             <div className="flex justify-between text-base font-extrabold text-slate-900 pt-3 border-t border-slate-200">
               <span>Total Paid</span>
-              <span className="text-brand-700 text-xl font-black">${reservation.totalAmount.toFixed(2)}</span>
+              <span className="text-brand-700 text-xl font-black">{formatCurrency(reservation.totalAmount)}</span>
             </div>
           </div>
         </div>

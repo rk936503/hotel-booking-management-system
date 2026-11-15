@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { RoomType } from '../types';
+import { formatCurrency } from '../utils/currency';
 import { Calendar, Users, ArrowRight, Star, Wifi, Utensils, Sparkles, Waves, ShieldCheck } from 'lucide-react';
 
 export const HomePage: React.FC = () => {
@@ -232,7 +233,7 @@ export const HomePage: React.FC = () => {
 
                   <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
                     <div>
-                      <span className="text-2xl font-black text-slate-900">${rt.basePrice}</span>
+                      <span className="text-2xl font-black text-slate-900">{formatCurrency(rt.basePrice)}</span>
                       <span className="text-xs text-slate-500 font-medium"> / night</span>
                     </div>
                     <button

@@ -87,7 +87,7 @@ async function main() {
       data: {
         name: 'Standard Single',
         description: 'Comfortable single room with modern amenities, perfect for solo travelers. Features a queen-size bed, work desk, and city view.',
-        basePrice: 99.99,
+        basePrice: 2500.00,
         capacity: 1,
         amenities: ['Wi-Fi', 'TV', 'Air Conditioning', 'Mini Bar', 'Work Desk', 'Room Service'],
         imageUrl: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800',
@@ -97,7 +97,7 @@ async function main() {
       data: {
         name: 'Standard Double',
         description: 'Spacious double room ideal for couples or guests who prefer extra space. Features a king-size bed, sitting area, and garden view.',
-        basePrice: 149.99,
+        basePrice: 4000.00,
         capacity: 2,
         amenities: ['Wi-Fi', 'TV', 'Air Conditioning', 'Mini Bar', 'Coffee Maker', 'Room Service', 'Safe'],
         imageUrl: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800',
@@ -107,7 +107,7 @@ async function main() {
       data: {
         name: 'Deluxe Suite',
         description: 'Luxurious suite with separate living area, premium furnishings, and panoramic views. Perfect for business travelers and special occasions.',
-        basePrice: 249.99,
+        basePrice: 6500.00,
         capacity: 3,
         amenities: ['Wi-Fi', 'TV', 'Air Conditioning', 'Mini Bar', 'Coffee Maker', 'Room Service', 'Safe', 'Bathrobe', 'Balcony', 'Living Area'],
         imageUrl: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800',
@@ -117,7 +117,7 @@ async function main() {
       data: {
         name: 'Family Room',
         description: 'Large family-friendly room with two double beds, children\'s amenities, and connecting door option. Great for families with kids.',
-        basePrice: 199.99,
+        basePrice: 5500.00,
         capacity: 4,
         amenities: ['Wi-Fi', 'TV', 'Air Conditioning', 'Mini Bar', 'Coffee Maker', 'Room Service', 'Safe', 'Extra Beds Available', 'Kids Welcome Pack'],
         imageUrl: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800',
@@ -127,7 +127,7 @@ async function main() {
       data: {
         name: 'Presidential Suite',
         description: 'The finest accommodation featuring a master bedroom, full living room, dining area, private bar, and executive workspace. Includes butler service.',
-        basePrice: 499.99,
+        basePrice: 15000.00,
         capacity: 4,
         amenities: ['Wi-Fi', 'TV', 'Air Conditioning', 'Mini Bar', 'Coffee Maker', 'Room Service', 'Safe', 'Bathrobe', 'Balcony', 'Living Area', 'Dining Area', 'Butler Service', 'Jacuzzi', 'Private Bar'],
         imageUrl: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800',
@@ -180,15 +180,15 @@ async function main() {
     data: {
       bookingReference: 'HB-SEED-0001',
       userId: guest1.id,
-      roomId: rooms[4].id, // Room 103
+      roomId: rooms[4].id, // Room 103 (Standard Double: 4000)
       checkInDate: pastCheckIn,
       checkOutDate: pastCheckOut,
       numberOfGuests: 2,
       numberOfNights: 3,
-      roomPrice: 149.99,
-      subtotal: 449.97,
-      taxAmount: 54.00,
-      totalAmount: 503.97,
+      roomPrice: 4000.00,
+      subtotal: 12000.00,
+      taxAmount: 1440.00,
+      totalAmount: 13440.00,
       status: ReservationStatus.CHECKED_OUT,
     },
   });
@@ -196,7 +196,7 @@ async function main() {
   await prisma.payment.create({
     data: {
       reservationId: reservation1.id,
-      amount: 503.97,
+      amount: 13440.00,
       paymentMethod: 'CREDIT_CARD',
       paymentStatus: PaymentStatus.SUCCESS,
       transactionReference: `TXN-SEED-${uuidv4().slice(0, 8)}`,
@@ -213,15 +213,15 @@ async function main() {
     data: {
       bookingReference: 'HB-SEED-0002',
       userId: guest2.id,
-      roomId: rooms[8].id, // Room 301
+      roomId: rooms[8].id, // Room 301 (Deluxe Suite: 6500)
       checkInDate: pastCheckIn2,
       checkOutDate: pastCheckOut2,
       numberOfGuests: 2,
       numberOfNights: 2,
-      roomPrice: 249.99,
-      subtotal: 499.98,
-      taxAmount: 60.00,
-      totalAmount: 559.98,
+      roomPrice: 6500.00,
+      subtotal: 13000.00,
+      taxAmount: 1560.00,
+      totalAmount: 14560.00,
       status: ReservationStatus.CHECKED_OUT,
     },
   });
@@ -229,7 +229,7 @@ async function main() {
   await prisma.payment.create({
     data: {
       reservationId: reservation2.id,
-      amount: 559.98,
+      amount: 14560.00,
       paymentMethod: 'DEBIT_CARD',
       paymentStatus: PaymentStatus.SUCCESS,
       transactionReference: `TXN-SEED-${uuidv4().slice(0, 8)}`,
@@ -246,15 +246,15 @@ async function main() {
     data: {
       bookingReference: 'HB-SEED-0003',
       userId: guest1.id,
-      roomId: rooms[0].id, // Room 101
+      roomId: rooms[0].id, // Room 101 (Standard Single: 2500)
       checkInDate: currentCheckIn,
       checkOutDate: currentCheckOut,
       numberOfGuests: 1,
       numberOfNights: 3,
-      roomPrice: 99.99,
-      subtotal: 299.97,
-      taxAmount: 36.00,
-      totalAmount: 335.97,
+      roomPrice: 2500.00,
+      subtotal: 7500.00,
+      taxAmount: 900.00,
+      totalAmount: 8400.00,
       status: ReservationStatus.CHECKED_IN,
     },
   });
@@ -268,7 +268,7 @@ async function main() {
   await prisma.payment.create({
     data: {
       reservationId: reservation3.id,
-      amount: 335.97,
+      amount: 8400.00,
       paymentMethod: 'CREDIT_CARD',
       paymentStatus: PaymentStatus.SUCCESS,
       transactionReference: `TXN-SEED-${uuidv4().slice(0, 8)}`,
@@ -285,15 +285,15 @@ async function main() {
     data: {
       bookingReference: 'HB-SEED-0004',
       userId: guest3.id,
-      roomId: rooms[5].id, // Room 104
+      roomId: rooms[5].id, // Room 104 (Standard Double: 4000)
       checkInDate: futureCheckIn,
       checkOutDate: futureCheckOut,
       numberOfGuests: 2,
       numberOfNights: 3,
-      roomPrice: 149.99,
-      subtotal: 449.97,
-      taxAmount: 54.00,
-      totalAmount: 503.97,
+      roomPrice: 4000.00,
+      subtotal: 12000.00,
+      taxAmount: 1440.00,
+      totalAmount: 13440.00,
       status: ReservationStatus.CONFIRMED,
     },
   });
@@ -301,7 +301,7 @@ async function main() {
   await prisma.payment.create({
     data: {
       reservationId: reservation4.id,
-      amount: 503.97,
+      amount: 13440.00,
       paymentMethod: 'NET_BANKING',
       paymentStatus: PaymentStatus.SUCCESS,
       transactionReference: `TXN-SEED-${uuidv4().slice(0, 8)}`,
@@ -318,15 +318,15 @@ async function main() {
     data: {
       bookingReference: 'HB-SEED-0005',
       userId: guest2.id,
-      roomId: rooms[11].id, // Room 401
+      roomId: rooms[11].id, // Room 401 (Family Room: 5500)
       checkInDate: cancelledCheckIn,
       checkOutDate: cancelledCheckOut,
       numberOfGuests: 3,
       numberOfNights: 2,
-      roomPrice: 199.99,
-      subtotal: 399.98,
-      taxAmount: 48.00,
-      totalAmount: 447.98,
+      roomPrice: 5500.00,
+      subtotal: 11000.00,
+      taxAmount: 1320.00,
+      totalAmount: 12320.00,
       status: ReservationStatus.CANCELLED,
     },
   });
@@ -334,7 +334,7 @@ async function main() {
   await prisma.payment.create({
     data: {
       reservationId: reservation5.id,
-      amount: 447.98,
+      amount: 12320.00,
       paymentMethod: 'CREDIT_CARD',
       paymentStatus: PaymentStatus.REFUNDED,
       transactionReference: `TXN-SEED-${uuidv4().slice(0, 8)}`,
@@ -351,15 +351,15 @@ async function main() {
     data: {
       bookingReference: 'HB-SEED-0006',
       userId: guest2.id,
-      roomId: rooms[9].id, // Room 302
+      roomId: rooms[9].id, // Room 302 (Deluxe Suite: 6500)
       checkInDate: todayArrivalCheckIn,
       checkOutDate: todayArrivalCheckOut,
       numberOfGuests: 2,
       numberOfNights: 3,
-      roomPrice: 249.99,
-      subtotal: 749.97,
-      taxAmount: 90.00,
-      totalAmount: 839.97,
+      roomPrice: 6500.00,
+      subtotal: 19500.00,
+      taxAmount: 2340.00,
+      totalAmount: 21840.00,
       status: ReservationStatus.CONFIRMED,
     },
   });
@@ -367,7 +367,7 @@ async function main() {
   await prisma.payment.create({
     data: {
       reservationId: reservation6.id,
-      amount: 839.97,
+      amount: 21840.00,
       paymentMethod: 'UPI',
       paymentStatus: PaymentStatus.SUCCESS,
       transactionReference: `TXN-SEED-${uuidv4().slice(0, 8)}`,
@@ -381,7 +381,7 @@ async function main() {
     data: [
       { userId: admin.id, action: 'USER_REGISTERED', entityType: 'User', entityId: admin.id, newValue: JSON.stringify({ role: 'ADMIN' }) },
       { userId: guest1.id, action: 'RESERVATION_CREATED', entityType: 'Reservation', entityId: reservation1.id, newValue: JSON.stringify({ bookingReference: 'HB-SEED-0001' }) },
-      { userId: guest1.id, action: 'PAYMENT_PROCESSED', entityType: 'Payment', entityId: reservation1.id, newValue: JSON.stringify({ amount: 503.97 }) },
+      { userId: guest1.id, action: 'PAYMENT_PROCESSED', entityType: 'Payment', entityId: reservation1.id, newValue: JSON.stringify({ amount: 13440.00 }) },
       { userId: staff1.id, action: 'GUEST_CHECKED_IN', entityType: 'Reservation', entityId: reservation3.id, newValue: JSON.stringify({ status: 'CHECKED_IN' }) },
       { userId: guest2.id, action: 'RESERVATION_CANCELLED', entityType: 'Reservation', entityId: reservation5.id, oldValue: JSON.stringify({ status: 'CONFIRMED' }), newValue: JSON.stringify({ status: 'CANCELLED' }) },
     ],

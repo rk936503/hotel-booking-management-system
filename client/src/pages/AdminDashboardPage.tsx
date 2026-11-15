@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import { DashboardStats, Room, RoomType, User, AuditLog } from '../types';
+import { formatCurrency, formatCurrencyCompact } from '../utils/currency';
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area, CartesianGrid, LineChart, Line
 } from 'recharts';
 import {
-  Shield, DollarSign, Bed, Calendar, Users, Activity, Plus, Trash2, Edit3, CheckCircle, RefreshCw, Layers, FileText
+  Shield, IndianRupee, Bed, Calendar, Users, Activity, Plus, Trash2, Edit3, CheckCircle, RefreshCw, Layers, FileText
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -29,7 +30,7 @@ export const AdminDashboardPage: React.FC = () => {
   const [showRoomTypeModal, setShowRoomTypeModal] = useState(false);
   const [newTypeName, setNewTypeName] = useState('');
   const [newTypeDesc, setNewTypeDesc] = useState('');
-  const [newTypePrice, setNewTypePrice] = useState('149.99');
+  const [newTypePrice, setNewTypePrice] = useState('4000.00');
   const [newTypeCap, setNewTypeCap] = useState('2');
   const [newTypeAmenities, setNewTypeAmenities] = useState('Wi-Fi, TV, Mini Bar, Coffee Maker');
 
@@ -184,10 +185,10 @@ export const AdminDashboardPage: React.FC = () => {
             <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
               <div className="flex justify-between items-center text-slate-500 mb-2">
                 <span className="text-xs font-bold uppercase tracking-wider">Total Revenue</span>
-                <DollarSign className="w-5 h-5 text-emerald-600" />
+                <IndianRupee className="w-5 h-5 text-emerald-600" />
               </div>
-              <div className="text-3xl font-black text-slate-900">${stats.revenue.total.toFixed(2)}</div>
-              <span className="text-xs text-slate-500 mt-1 block">From successful card/UPI transactions</span>
+              <div className="text-3xl font-black text-slate-900">{formatCurrency(stats.revenue.total)}</div>
+              <span className="text-xs text-slate-500 mt-1 block">From successful card/UPI/NetBanking transactions</span>
             </div>
 
             <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
@@ -243,8 +244,8 @@ export const AdminDashboardPage: React.FC = () => {
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
                   <XAxis dataKey="month" stroke="#94a3b8" fontSize={12} tickLine={false} />
-                  <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} tickFormatter={(v) => `$${v}`} />
-                  <Tooltip formatter={(value: any) => [`$${value}`, 'Revenue']} />
+                  <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} tickFormatter={(v) => `₹${v.toLocaleString('en-IN')}`} />
+                  <Tooltip formatter={(value: any) => [formatCurrency(Number(value)), 'Revenue']} />
                   <Area type="monotone" dataKey="revenue" stroke="#0d9488" strokeWidth={3} fillOpacity={1} fill="url(#colorRev)" />
                 </AreaChart>
               </ResponsiveContainer>
@@ -288,7 +289,7 @@ export const AdminDashboardPage: React.FC = () => {
                     <td className="px-5 py-4 font-bold text-slate-900 text-sm">Room {r.roomNumber}</td>
                     <td className="px-5 py-4 font-semibold text-slate-800">{r.roomType?.name}</td>
                     <td className="px-5 py-4 text-slate-600">Floor {r.floor}</td>
-                    <td className="px-5 py-4 font-bold text-slate-900">${r.roomType?.basePrice.toFixed(2)}</td>
+                    <td className="px-5 py-4 font-bold text-slate-900">{formatCurrency(r.roomType?.basePrice)}</td>
                     <td className="px-5 py-4">
                       <span className={`text-[10px] px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider ${
                         r.status === 'AVAILABLE' ? 'bg-emerald-100 text-emerald-800' :
@@ -341,7 +342,7 @@ export const AdminDashboardPage: React.FC = () => {
                     <span className="text-xs font-semibold text-brand-700">Max {rt.capacity} Guests • {rt._count?.rooms || 0} Rooms Assigned</span>
                   </div>
                   <div className="text-right">
-                    <span className="text-2xl font-black text-slate-900">${rt.basePrice}</span>
+                    <span className="text-2xl font-black text-slate-900">{formatCurrency(rt.basePrice)}</span>
                     <span className="text-xs text-slate-500 block">/ night</span>
                   </div>
                 </div>
@@ -492,7 +493,7 @@ export const AdminDashboardPage: React.FC = () => {
                   className="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm outline-none bg-white"
                 >
                   {roomTypes.map((rt) => (
-                    <option key={rt.id} value={rt.id}>{rt.name} (${rt.basePrice}/night)</option>
+                    <option key={rt.id} value={rt.id}>{rt.name} ({formatCurrency(rt.basePrice)}/night)</option>
                   ))}
                 </select>
               </div>
@@ -548,7 +549,7 @@ export const AdminDashboardPage: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Base Price ($)</label>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Base Price (₹ INR / night)</label>
                   <input
                     type="number"
                     step="0.01"

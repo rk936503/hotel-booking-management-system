@@ -86,6 +86,7 @@ The application adopts a **Modular Monolith** architecture that cleanly separate
 
 ### Reservation Lifecycle & Workflow
 - Interactive 15-minute countdown during hold checkout.
+- **Indian Rupee (INR - ₹) Currency Localization:** Complete Indian locale formatting (`en-IN`) across all guest, staff, and admin views using JavaScript `Intl.NumberFormat`.
 - Itemized pricing breakdown with subtotal, government tax (12%), and total balance.
 - Unique booking reference generation (`HB-YYYY-XXXXX`).
 - Deterministic state machine supporting `PENDING` ➔ `CONFIRMED` ➔ `CHECKED_IN` ➔ `CHECKED_OUT` and `CANCELLED`.
@@ -151,8 +152,8 @@ The application provides intuitive, responsive user experiences across all roles
 ├────────────────────────────────────────────────────────────────────────┤
 │ Available Rooms:                                                       │
 │ ┌───────────────────────────┐  ┌───────────────────────────────────┐   │
-│ │ Deluxe Suite - $180/night │  │ Executive Suite - $320/night      │   │
-│ │ Max Guests: 2 • King Bed  │  │ Max Guests: 4 • Ocean View        │   │
+│ │ Deluxe Suite - ₹6,500/night │ │ Executive Suite - ₹15,000/night   │   │
+│ │ Max Guests: 3 • King Bed  │  │ Max Guests: 4 • Panoramic View    │   │
 │ │ [ Book Now with 15m Hold ]│  │ [ Book Now with 15m Hold ]        │   │
 │ └───────────────────────────┘  └───────────────────────────────────┘   │
 └────────────────────────────────────────────────────────────────────────┘
@@ -244,7 +245,7 @@ npm run db:seed
 
 The database will be populated with:
 - **6 Users**: 1 Admin, 2 Staff members, 3 Guest accounts.
-- **5 Room Types**: Standard Room ($120), Deluxe Room ($180), Executive Suite ($320), Family Suite ($260), Presidential Villa ($750).
+- **5 Room Types**: Standard Single (₹2,500/night), Standard Double (₹4,000/night), Deluxe Suite (₹6,500/night), Family Room (₹5,500/night), Presidential Suite (₹15,000/night).
 - **15 Physical Rooms**: Across floors 1, 2, 3, and 4.
 - **6 Real-world Reservations**: Demonstrating all lifecycle states (`CHECKED_IN`, `CONFIRMED`, `CANCELLED`, `CHECKED_OUT`, `PENDING`).
 - **Complete Payments & Audit Logs**: Fully reconciled transactions for immediate dashboard metrics.
